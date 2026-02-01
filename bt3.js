@@ -43,12 +43,8 @@ for( i = 0; i <= borrow; i++ ){
             break;
         }
     };
-    const infor = {
-        Tên_bạn_đọc : name_user,
-        Tên_sách :name_book,
-        Số_ngày_mượn: day_borrow_now,
-        Số_ngày_gia_hạn: day_borrow_future,
-    };
-    lish_loan[i] = infor;
-        console.log("Thông tin người dùng: ", infor);
+    console.log("Tên bạn đọc: ",name_user);
+    console.log("Tên sách: ",name_book);
+    console.log("Số ngày đã mượn: ",day_borrow_now);
+    console.log("Số ngày gia hạn thêm: ",day_borrow_future);
 }

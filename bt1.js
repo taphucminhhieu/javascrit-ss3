@@ -32,12 +32,8 @@ for(let i = 0 ; i< lisk ; i++) {
             console.log("vui long nhập lại ngà (1-30)");
         }
     }
-        const infor = {
-            Người_mượn: name_user,
-            Tên_sách: name_book,
-            Ngày_mượn: day,
-        };
-        lish_loan[i] =infor;
-        console.log("Thông tin người vừa nhập: ", infor);
+        console.log("Tên người mượn: ",name_user);
+        console.log("Tên sách: ",name_book);
+        console.log("Số ngày mượn: ",day);
 }
 

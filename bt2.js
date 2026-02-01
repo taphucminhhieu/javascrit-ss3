@@ -25,20 +25,16 @@ for(let i = 0 ; i< lisk ; i++) {
         console.log("Trả đúng hạn");
         break;
     }else if( day_borrow == 15 && day_borrow <= 21){
-        console.log("Trả muộn nhẹ" + "Phạt nhắc nhở");
+        console.log("Trả muộn nhẹ" + " Phạt nhắc nhở");
         break;
     }else if( day_borrow > 21) {
-        console.log("Quá hạn nghiêm trọng" + "Cần ghi bản phạt");
+        console.log("Quá hạn nghiêm trọng" + " Cần ghi bản phạt");
         break;
     }else {
         console.log("nhập lại");
     };
 }
-        const infor = {
-            Người_mượn: name_user,
-            Tên_sách: name_book,
-            Ngày_mượn: day_borrow,
-        };
-        lish_loan[i] = infor;
-        console.log("Thông tin người vừa nhập: ", infor);
+        console.log("Tên người trả: ",name_user);
+        console.log("Tên sách: ",name_book);
+        console.log("Số ngày mượn: ",day_borrow);
 }
