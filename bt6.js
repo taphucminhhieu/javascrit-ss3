@@ -1,64 +1,124 @@
-let totalFeedbacks = 0;
-let seriousComplaints = 0;
-let mediumComplaints = 0;
-let lightComplaints = 0;
-let improvementSuggestions = 0;
-let positiveFeedbacks = 0;
+let total_res = 0;
+let success_res = 0;
+let rejected_res = 0;
+let pending_res = 0;
 
-let continueWork = "có";
+let total_feedback = 0;
+let high_complaint = 0;
+let med_complaint = 0;
+let low_complaint = 0;
+let suggest_count = 0;
+let positive_count = 0;
 
-while (continueWork != "không") {
+while (true) {
+    let choice = prompt("Chọn nghiệp vụ xử lý:");
 
-    continueWork = prompt("Có khiếu nại/phản hồi mới từ bạn đọc không? (có/không)");
+    if (choice === "không" || choice === null) {
+        break;
+    }
 
-    if (continueWork == "có") {
-        
-        let readerName = prompt("Tên bạn đọc:");
-        while (readerName == "") {
-            readerName = prompt("Tên bạn đọc không được để trống! Vui lòng nhập lại:");
-        }
-
-        let cardId = prompt("Mã thẻ bạn đọc (nếu có, có thể để trống):");
-        let feedbackType = prompt("Loại phản hồi (1: Khiếu nại, 2: Đề xuất, 3: Tích cực):");
-        let content = prompt("Nội dung ngắn gọn:");
-
-        totalFeedbacks = totalFeedbacks + 1;
-
-        if (feedbackType == "1") {
-            let severityLevel = prompt("Mức độ nghiêm trọng (1: Nhẹ, 2: Trung bình, 3: Nghiêm trọng):");
-
-            if (severityLevel == "3") {
-                console.log("→ Chuyển ngay lãnh đạo - Khiếu nại nghiêm trọng");
-                seriousComplaints = seriousComplaints + 1;
-            } else {
-                if (severityLevel == "2") {
-                    console.log("→ Ghi nhận, sẽ xử lý trong ngày - Khiếu nại trung bình");
-                    mediumComplaints = mediumComplaints + 1;
-                } else {
-                    if (severityLevel == "1") {
-                        console.log("→ Xử lý ngay tại quầy - Khiếu nại nhẹ");
-                        lightComplaints = lightComplaints + 1;
-                    }
-                }
+    if (choice === "1") {
+        let ask_res = prompt("Có yêu cầu đặt mượn trước mới không? (có/không)");
+        if (ask_res === "có") {
+            let reader_res = prompt("Tên bạn đọc:");
+            let book_id = prompt("Mã sách muốn đặt trước:");
+            let book_title = prompt("Tên sách (tham khảo):");
+            
+            let wait_days;
+            while (true) {
+                wait_days = parseInt(prompt("Số ngày dự kiến chờ (>= 1):"));
+                if (wait_days >= 1) break;
+                alert("Vui lòng nhập số nguyên >= 1");
             }
-        } else {
-            if (feedbackType == "2") {
-                console.log("→ Cảm ơn! Đề xuất đã được ghi nhận");
-                improvementSuggestions = improvementSuggestions + 1;
+
+            let priority;
+            while (true) {
+                priority = parseInt(prompt("Mức ưu tiên (1: Sinh viên, 2: Giảng viên, 3: Đặc cách):"));
+                if (priority >= 1 && priority <= 3) break;
+                alert("Vui lòng nhập 1, 2 hoặc 3");
+            }
+
+            total_res++;
+
+            if (wait_days > 45) {
+                console.log("Từ chối: Thời gian chờ quá lâu (>45 ngày)");
+                rejected_res++;
+            } else if (priority === 3) {
+                console.log("Đặt trước thành công - Ưu tiên đặc cách cao nhất");
+                success_res++;
+            } else if (priority === 2 && wait_days <= 30) {
+                console.log("Đặt trước thành công - Ưu tiên giảng viên/nghiên cứu");
+                success_res++;
+            } else if (priority === 1 && wait_days <= 21) {
+                console.log("Đặt trước thành công");
+                success_res++;
             } else {
-                if (feedbackType == "3") {
-                    console.log("→ Cảm ơn bạn đã phản hồi tích cực!");
-                    positiveFeedbacks = positiveFeedbacks + 1;
+                console.log("Đặt trước tạm thời - Chờ xét duyệt thêm");
+                pending_res++;
+            }
+        }
+    }
+
+    else if (choice === "2") {
+        let ask_fb = prompt("Có khiếu nại/phản hồi mới không? (có/không)");
+        if (ask_fb === "có") {
+            let reader_fb;
+            while (true) {
+                reader_fb = prompt("Tên bạn đọc (không được để trống):");
+                if (reader_fb !== "" && reader_fb !== null) break;
+                alert("Không được để trống tên!");
+            }
+
+            let card_id = prompt("Mã thẻ bạn đọc (nếu có):");
+            
+            let fb_type;
+            while (true) {
+                fb_type = parseInt(prompt("Loại phản hồi (1: Phàn nàn, 2: Đề xuất, 3: Khen ngợi):"));
+                if (fb_type >= 1 && fb_type <= 3) break;
+                alert("Vui lòng nhập 1, 2 hoặc 3");
+            }
+
+            let content = prompt("Nội dung ngắn gọn:");
+            total_feedback++;
+
+            if (fb_type === 1) {
+                let level = parseInt(prompt("Mức độ (1: Nhẹ, 2: Trung bình, 3: Nghiêm trọng):"));
+                if (level === 3) {
+                    console.log("→ Chuyển ngay lãnh đạo - Khiếu nại nghiêm trọng");
+                    high_complaint++;
+                } else if (level === 2) {
+                    console.log("→ Ghi nhận, sẽ xử lý trong ngày - Khiếu nại trung bình");
+                    med_complaint++;
+                } else {
+                    console.log("→ Xử lý ngay tại quầy - Khiếu nại nhẹ");
+                    low_complaint++;
                 }
+            } else if (fb_type === 2) {
+                console.log("→ Cảm ơn! Đề xuất đã được ghi nhận");
+                suggest_count++;
+            } else if (fb_type === 3) {
+                console.log("→ Cảm ơn bạn đã phản hồi tích cực!");
+                positive_count++;
             }
         }
     }
 }
 
-console.log("--- BÁO CÁO TỔNG HỢP ---");
-console.log("Tổng số phản hồi/khiếu nại đã xử lý: " + totalFeedbacks);
-console.log("Số khiếu nại nghiêm trọng (mức 3): " + seriousComplaints);
-console.log("Số khiếu nại trung bình (mức 2): " + mediumComplaints);
-console.log("Số khiếu nại nhẹ (mức 1): " + lightComplaints);
-console.log("Số đề xuất cải thiện: " + improvementSuggestions);
-console.log("Số phản hồi tích cực: " + positiveFeedbacks);
+
+document.write("<h1>BÁO CÁO TỔNG KẾT CA LÀM VIỆC</h1>");
+
+document.write("<h2>1. Nghiệp vụ Đặt mượn trước:</h2>");
+document.write("Tổng số yêu cầu đã xử lý: " + total_res + "<br>");
+document.write("Số yêu cầu thành công: " + success_res + "<br>");
+document.write("Số yêu cầu bị từ chối: " + rejected_res + "<br>");
+document.write("Số yêu cầu chờ xét duyệt: " + pending_res);
+
+document.write("<hr>");
+
+document.write("<h2>2. Nghiệp vụ Khiếu nại / Phản hồi:</h2>");
+document.write("Tổng số phản hồi đã xử lý: " + total_feedback + "<br>");
+document.write("Khiếu nại nghiêm trọng (mức 3): " + high_complaint + "<br>");
+document.write("Khiếu nại trung bình (mức 2): " + med_complaint + "<br>");
+document.write("Khiếu nại nhẹ (mức 1): " + low_complaint + "<br>");
+document.write("Số đề xuất cải thiện: " + suggest_count + "<br>");
+document.write("Số phản hồi tích cực: " + positive_count);
