@@ -17,7 +17,7 @@ do {
 } while (false)// chỉ chạy 1 lần duy nhất
 
 //thông tin người dùng khai báo và lập danh sách
-const lish_loan = [];
+
 const borrow =Number(prompt ("Số người mượn sách"));
 const name_user = ("Tên bạn đọc:");
 const name_book = ("Tên sách");

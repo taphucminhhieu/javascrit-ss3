@@ -1,7 +1,7 @@
 // nhập thông tin
 let ask = prompt("hỏi thủ thư có bao nhiêu quyển sách: ");
 let lisk =Number(prompt("Số lần mượn sách."));
-const lish_loan = [];
+
 
 
 //xuất ra màn hình
